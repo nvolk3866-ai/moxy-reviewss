@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pl" class="h-full bg-[#0f0a1c] text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moxy Warsaw City - Guest Feedback</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Montserrat & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            moxy: {
+              black: '#0f0a1c',
+              card: '#16102b',
+              cardBorder: '#2a1f4d',
+              violet: '#a855f7',
+              violetLight: '#c084fc',
+              magenta: '#d946ef',
+              neonPink: '#f43f5e',
+              deepPurple: '#0a0614'
+            }
+          },
+          fontFamily: {
+            montserrat: ['Montserrat', 'sans-serif'],
+            inter: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, .font-moxy {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .neon-text-glow {
+      text-shadow: 0 0 12px rgba(217, 70, 239, 0.6), 0 0 24px rgba(168, 85, 247, 0.4);
+    }
+    .neon-box-glow {
+      box-shadow: 0 0 30px -5px rgba(217, 70, 239, 0.25), 0 0 18px -5px rgba(168, 85, 247, 0.3);
+    }
+    .star-glow {
+      filter: drop-shadow(0 0 10px rgba(217, 70, 239, 0.9));
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(1.05); }
+    }
+    .animate-pulse-glow {
+      animation: pulseGlow 3.5s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 bg-[#0f0a1c] text-slate-100 relative overflow-x-hidden">
+
+  <!-- Glow Background Accents -->
+  <div class="fixed top-[-10%] left-[-10%] w-[60vw] h-[60vw] max-w-[450px] max-h-[450px] bg-moxy-magenta/20 rounded-full blur-[110px] pointer-events-none animate-pulse-glow"></div>
+  <div class="fixed bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[450px] max-h-[450px] bg-moxy-violet/20 rounded-full blur-[110px] pointer-events-none animate-pulse-glow" style="animation-delay: 1.75s;"></div>
+
+  <!-- Header -->
+  <header class="w-full max-w-md mx-auto flex justify-between items-center py-2 mb-4 relative z-10">
+    <!-- Hotel Brand Tag -->
+    <div class="flex items-center space-x-2">
+      <span class="bg-gradient-to-r from-moxy-magenta to-moxy-violet text-white font-black text-xs px-2.5 py-1 rounded-md tracking-wider uppercase font-moxy">
+        MOXY
+      </span>
+      <span id="headerHotelName" class="text-xs font-bold tracking-wider text-slate-200 uppercase">
+        Warsaw City
+      </span>
+    </div>
+
+    <!-- Controls: Language Switcher, Help, Settings -->
+    <div class="flex items-center space-x-2">
+      <!-- Language Switcher -->
+      <div class="bg-moxy-card border border-moxy-cardBorder rounded-full p-1 flex items-center shadow-lg">
+        <button id="langPlBtn" onclick="setLanguage('pl')" class="px-2.5 py-0.5 rounded-full text-xs font-bold transition-all duration-200 bg-moxy-magenta text-white">
+          PL
+        </button>
+        <button id="langEnBtn" onclick="setLanguage('en')" class="px-2.5 py-0.5 rounded-full text-xs font-bold transition-all duration-200 text-slate-400 hover:text-white">
+          EN
+        </button>
+      </div>
+
+      <!-- Staff Instruction Modal Trigger -->
+      <button onclick="toggleHelpModal()" class="w-8 h-8 rounded-full bg-moxy-card border border-moxy-cardBorder text-slate-300 hover:text-moxy-magenta hover:border-moxy-magenta transition flex items-center justify-center text-xs shadow-lg" title="Instrukcja / Help">
+        <i class="fa-solid fa-circle-question"></i>
+      </button>
+
+      <!-- Settings Modal Trigger -->
+      <button onclick="toggleSettingsModal()" class="w-8 h-8 rounded-full bg-moxy-card border border-moxy-cardBorder text-slate-300 hover:text-moxy-magenta hover:border-moxy-magenta transition flex items-center justify-center text-xs shadow-lg" title="Ustawienia / Settings">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Card -->
+  <main class="w-full max-w-md mx-auto my-auto relative z-10">
+    <div class="bg-moxy-card/90 backdrop-blur-2xl border border-moxy-cardBorder rounded-3xl p-6 sm:p-8 shadow-2xl neon-box-glow relative overflow-hidden">
+      
+      <!-- Top Decorative Gradient Bar -->
+      <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-moxy-violet via-moxy-magenta to-moxy-neonPink"></div>
+
+      <!-- Hotel Branding Logo & Header -->
+      <div class="text-center mb-6 pt-2">
+        <div class="inline-block p-3 rounded-2xl bg-gradient-to-br from-moxy-magenta/20 to-moxy-violet/20 border border-moxy-magenta/30 mb-3 shadow-inner">
+          <i class="fa-solid fa-martini-glass-citrus text-3xl text-moxy-magenta"></i>
+        </div>
+        <h1 id="displayHotelTitle" class="text-2xl font-black text-white tracking-tight uppercase mb-1 font-moxy">
+          MOXY WARSAW CITY
+        </h1>
+        <p class="text-xs text-moxy-magenta font-semibold tracking-widest uppercase mb-3" id="subTagline">
+          #ATMOXY #PLAYON
+        </p>
+        <p id="greetingText" class="text-sm text-slate-300 leading-relaxed font-normal">
+          Jak minął Twój pobyt u nas? Oceń swoje doświadczenie:
+        </p>
+      </div>
+
+      <!-- STATE 1: Star Rating Widget -->
+  <div id="ratingSection" class="transition-all duration-300">
+    <div class="flex justify-center items-center gap-2 sm:gap-3 py-4 my-2">
+      <button onclick="rate(1)" onmouseenter="highlightStars(1)" onmouseleave="resetStars()" class="star-btn text-3xl sm:text-4xl text-slate-700 hover:scale-125 active:scale-90 transition-all duration-200 focus:outline-none" data-value="1">
+        <i class="fa-solid fa-star"></i>
+      </button>
+      <button onclick="rate(2)" onmouseenter="highlightStars(2)" onmouseleave="resetStars()" class="star-btn text-3xl sm:text-4xl text-slate-700 hover:scale-125 active:scale-90 transition-all duration-200 focus:outline-none" data-value="2">
+        <i class="fa-solid fa-star"></i>
+      </button>
+      <button onclick="rate(3)" onmouseenter="highlightStars(3)" onmouseleave="resetStars()" class="star-btn text-3xl sm:text-4xl text-slate-700 hover:scale-125 active:scale-90 transition-all duration-200 focus:outline-none" data-value="3">
+        <i class="fa-solid fa-star"></i>
+      </button>
+      <button onclick="rate(4)" onmouseenter="highlightStars(4)" onmouseleave="resetStars()" class="star-btn text-3xl sm:text-4xl text-slate-700 hover:scale-125 active:scale-90 transition-all duration-200 focus:outline-none" data-value="4">
+        <i class="fa-solid fa-star"></i>
+      </button>
+      <button onclick="rate(5)" onmouseenter="highlightStars(5)" onmouseleave="resetStars()" class="star-btn text-3xl sm:text-4xl text-slate-700 hover:scale-125 active:scale-90 transition-all duration-200 focus:outline-none" data-value="5">
+        <i class="fa-solid fa-star"></i>
+      </button>
+    </div>
+    <p id="clickToRateHint" class="text-xs text-center text-slate-400 font-medium">
+      Kliknij gwiazdkę, aby wystawić ocenę
+    </p>
+  </div>
+        <p id="clickToRateHint" class="text-xs text-center text-slate-400 font-medium">
+          Kliknij gwiazdkę, aby wystawić ocenę
+        </p>
+      </div>
+
+      <!-- STATE 2: Redirecting to Google Reviews (4-5 Stars) -->
+      <div id="redirectSection" class="hidden text-center py-4">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-moxy-magenta/20 border border-moxy-magenta/40 text-moxy-magenta flex items-center justify-center text-2xl shadow-lg relative">
+          <i class="fa-solid fa-star animate-bounce"></i>
+        </div>
+        <h2 id="thanksTitle" class="text-xl font-bold text-white mb-2 font-moxy">
+          Super! Dziękujemy!
+        </h2>
+        <p id="thanksText" class="text-xs text-slate-300 mb-6 leading-relaxed">
+          Twój głos ma ogromne znaczenie! Przekierowujemy Cię do Google Maps...
+        </p>
+
+        <!-- Spinner loader -->
+        <div class="flex justify-center items-center space-x-2 mb-6">
+          <div class="w-2.5 h-2.5 bg-moxy-magenta rounded-full animate-ping"></div>
+          <div class="w-2.5 h-2.5 bg-moxy-violet rounded-full animate-ping" style="animation-delay: 0.2s"></div>
+          <div class="w-2.5 h-2.5 bg-moxy-violetLight rounded-full animate-ping" style="animation-delay: 0.4s"></div>
+        </div>
+
+        <div class="space-y-3">
+          <a id="googleRedirectBtn" href="#" target="_blank" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-moxy-magenta to-moxy-violet text-white font-bold text-sm shadow-lg shadow-moxy-magenta/25 hover:brightness-110 transition flex items-center justify-center space-x-2 font-moxy uppercase tracking-wider">
+            <span id="openGoogleBtnText">Otwórz Google Reviews</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+          </a>
+          <button onclick="resetApp()" id="backBtn1" class="text-xs text-slate-400 hover:text-white underline pt-2 block mx-auto">
+            Wróć do wyboru
+          </button>
+        </div>
+      </div>
+
+      <!-- STATE 3: Internal Feedback Form (1-3 Stars) -->
+      <div id="feedbackSection" class="hidden">
+        <div class="text-center mb-4">
+          <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-moxy-magenta/10 border border-moxy-magenta/30 text-moxy-magenta flex items-center justify-center text-xl">
+            <i class="fa-solid fa-heart-crack"></i>
+          </div>
+          <h2 id="sorryTitle" class="text-lg font-bold text-white font-moxy">
+            Przepraszamy za niedogodności
+          </h2>
+          <p id="sorryText" class="text-xs text-slate-300">
+            Co możemy poprawić? Napisz bezpośrednio do Managera Hotelu:
+          </p>
+        </div>
+
+        <form id="complaintForm" onsubmit="submitFeedback(event)" class="space-y-3">
+          <div>
+            <label id="lblGuestName" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+              Twoje Imię (Opcjonalnie)
+            </label>
+            <input type="text" id="guestName" placeholder="Jan" class="w-full px-3.5 py-2.5 bg-moxy-black/90 border border-moxy-cardBorder rounded-xl text-xs text-white placeholder-slate-600 focus:outline-none focus:border-moxy-magenta transition">
+          </div>
+          <div>
+            <label id="lblGuestContact" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+              Numer Pokoju / Email / Telefon
+            </label>
+            <input type="text" id="guestContact" placeholder="Pokój 204 lub email..." class="w-full px-3.5 py-2.5 bg-moxy-black/90 border border-moxy-cardBorder rounded-xl text-xs text-white placeholder-slate-600 focus:outline-none focus:border-moxy-magenta transition">
+          </div>
+          <div>
+            <label id="lblGuestComment" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
+              Co poszło nie tak? *
+            </label>
+            <textarea id="guestComment" required rows="3" placeholder="Opisz sytuację..." class="w-full px-3.5 py-2.5 bg-moxy-black/90 border border-moxy-cardBorder rounded-xl text-xs text-white placeholder-slate-600 focus:outline-none focus:border-moxy-magenta transition resize-none"></textarea>
+          </div>
+          <button type="submit" id="submitFeedbackBtn" class="w-full py-3 bg-gradient-to-r from-moxy-magenta to-moxy-violet text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-md hover:brightness-110 transition font-moxy">
+            Wyślij do Dyrekcji
+          </button>
+          <button type="button" onclick="resetApp()" id="backBtn2" class="w-full py-2 text-xs text-slate-400 hover:text-white text-center block">
+            Anuluj
+          </button>
+        </form>
+      </div>
+
+      <!-- STATE 4: Thank You Screen after Internal Feedback -->
+      <div id="thankYouSection" class="hidden text-center py-6">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-moxy-violet/20 border border-moxy-violet/40 text-moxy-violetLight flex items-center justify-center text-2xl shadow-lg">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <h2 id="sentTitle" class="text-xl font-bold text-white mb-2 font-moxy">
+          Wiadomość wysłana
+        </h2>
+        <p id="sentText" class="text-xs text-slate-300 mb-6 leading-relaxed">
+          Dziękujemy za szczerość. Informacja została przekazana bezpośrednio do Managera Moxy Warsaw City.
+        </p>
+        <button onclick="resetApp()" id="closeBtn" class="px-6 py-2.5 rounded-xl bg-moxy-cardBorder hover:bg-slate-700 text-white text-xs font-semibold transition">
+          Zamknij
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full max-w-md mx-auto text-center py-4 text-[11px] text-slate-500 relative z-10">
+    <p>© <span id="year"></span> <span id="footerHotelName">Moxy Warsaw City</span>. All rights reserved.</p>
+  </footer>
+
+  <!-- MODAL: Settings -->
+  <div id="settingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-moxy-card border border-moxy-cardBorder rounded-2xl max-w-md w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-moxy-cardBorder">
+        <h3 id="modalSettingsTitle" class="text-base font-bold text-white flex items-center gap-2 font-moxy">
+          <i class="fa-solid fa-sliders text-moxy-magenta"></i>
+          Konfiguracja / Settings
+        </h3>
+        <button onclick="toggleSettingsModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form onsubmit="saveSettings(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Nazwa Hotelu / Hotel Name</label>
+          <input type="text" id="settingHotelName" class="w-full px-3 py-2 bg-moxy-black border border-moxy-cardBorder rounded-lg text-white focus:outline-none focus:border-moxy-magenta">
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Google Reviews Link (4-5 ★)</label>
+          <input type="text" id="settingGoogleUrl" placeholder="search.google.com/local/writereview?placeid=..." class="w-full px-3 py-2 bg-moxy-black border border-moxy-cardBorder rounded-lg text-white focus:outline-none focus:border-moxy-magenta">
+          <p class="text-[10px] text-slate-500 mt-1">Strona docelowa z ocenami w Google Maps (możesz wkleić bez https://).</p>
+        </div>
+
+        <div>
+          <label class="block font-semibold text-slate-300 mb-1">Email Managera (1-3 ★)</label>
+          <input type="email" id="settingManagerEmail" placeholder="manager@moxywarsawcity.com" class="w-full px-3 py-2 bg-moxy-black border border-moxy-cardBorder rounded-lg text-white focus:outline-none focus:border-moxy-magenta">
+          <p class="text-[10px] text-slate-500 mt-1">Adres e-mail do odbierania prywatnych opinii.</p>
+        </div>
+
+        <div class="pt-3 flex gap-2">
+          <button type="submit" class="flex-1 py-2.5 bg-moxy-magenta hover:bg-moxy-neonPink text-white font-bold rounded-lg transition font-moxy uppercase tracking-wider">
+            Zapisz
+          </button>
+          <button type="button" onclick="toggleSettingsModal()" class="px-4 py-2.5 bg-moxy-cardBorder text-slate-300 rounded-lg hover:text-white transition">
+            Anuluj
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Staff Help -->
+  <div id="helpModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-moxy-card border border-moxy-cardBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4 pb-3 border-b border-moxy-cardBorder">
+        <h3 id="modalHelpTitle" class="text-base font-bold text-white flex items-center gap-2 font-moxy">
+          <i class="fa-solid fa-graduation-cap text-moxy-magenta"></i>
+          Instrukcja dla Obsługi / Help Guide
+        </h3>
+        <button onclick="toggleHelpModal()" class="text-slate-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs text-slate-300 leading-relaxed">
+        <div class="bg-moxy-magenta/10 border border-moxy-magenta/30 rounded-xl p-3 text-moxy-magenta">
+          <i class="fa-solid fa-shield-halved mr-1"></i>
+          <strong>Google Place ID:</strong> Link jest domyślnie skonfigurowany pod Moxy Warsaw City (`ChIJaya_WgzNHkcRaVzJJPo0aYE`).
+        </div>
+
+        <h4 class="font-bold text-white text-sm pt-1">1. Jak działa filtracja opinii?</h4>
+        <ul class="list-disc pl-4 space-y-1">
+          <li><strong class="text-emerald-400">Ocena 4 lub 5 gwiazdek:</strong> Gość jest zadowolony. Aplikacja natychmiast przekierowuje go do oficjalnego formularza Google Reviews Moxy Warsaw City.</li>
+          <li><strong class="text-moxy-magenta">Ocena 1, 2 lub 3 gwiazdki:</strong> Otwiera się wewnętrzny formularz wiadomości. Opinia trafia bezpośrednio do Managera hotelu i NIE pojawia się na Google Maps.</li>
+        </ul>
+
+        <h4 class="font-bold text-white text-sm pt-1">2. Jak zapisać link na Kartę NFC?</h4>
+        <ol class="list-decimal pl-4 space-y-1">
+          <li>Pobierz darmową aplikację <strong>NFC Tools</strong> na телефон.</li>
+          <li>Wybierz <i>Zapisz (Write) ➔ Dodaj rekord (Add a record) ➔ URL / Link</i>.</li>
+          <li>Wklej adres internetowy tej strony.</li>
+          <li>Zbliż kartę NFC do telefonu, aby zapisać.</li>
+        </ol>
+      </div>
+
+      <div class="mt-6 pt-3 border-t border-moxy-cardBorder text-right">
+        <button onclick="toggleHelpModal()" class="px-5 py-2 bg-moxy-magenta hover:bg-moxy-neonPink text-white font-bold rounded-lg text-xs uppercase tracking-wider transition font-moxy">
+          Rozumiem / Got it
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dictionary translations for PL & EN
+    const TRANSLATIONS = {
+      pl: {
+        headerHotel: "Warsaw City",
+        greeting: "Jak minął Twój pobyt w Moxy? Oceń swoje doświadczenie:",
+        subTagline: "#ATMOXY #PLAYON",
+        clickToRate: "Kliknij gwiazdkę, aby wystawić ocenę",
+        thanksTitle: "Super! Dziękujemy!",
+        thanksText: "Twój głos ma ogromne znaczenie! Przekierowujemy Cię do Google Maps...",
+        openGoogleBtn: "Otwórz Google Reviews",
+        backBtn: "Wróć do wyboru",
+        sorryTitle: "Przepraszamy za niedogodności",
+        sorryText: "Co możemy poprawić? Napisz bezpośrednio do Managera Hotelu:",
+        lblGuestName: "Twoje Imię (Opcjonalnie)",
+        lblGuestContact: "Numer Pokoju / Email / Telefon",
+        lblGuestComment: "Co poszło nie tak? *",
+        phName: "Jan",
+        phContact: "Pokój 204 lub jan@email.com",
+        phComment: "Opisz sytuację...",
+        submitBtn: "Wyślij do Dyrekcji",
+        cancelBtn: "Anuluj",
+        sentTitle: "Wiadomość wysłana",
+        sentText: "Dziękujemy za szczerość. Informacja została przekazana bezpośrednio do Managera Moxy Warsaw City.",
+        closeBtn: "Zamknij"
+      },
+      en: {
+        headerHotel: "Warsaw City",
+        greeting: "How was your stay at Moxy? Rate your experience below:",
+        subTagline: "#ATMOXY #PLAYON",
+        clickToRate: "Tap a star to rate your stay",
+        thanksTitle: "Awesome! Thank You!",
+        thanksText: "Your feedback means the world to us! Redirecting you to Google Reviews...",
+        openGoogleBtn: "Open Google Reviews",
+        backBtn: "Go back",
+        sorryTitle: "We're So Sorry!",
+        sorryText: "How can we make things right? Send a message directly to the Hotel Manager:",
+        lblGuestName: "Your Name (Optional)",
+        lblGuestContact: "Room Number / Email / Phone",
+        lblGuestComment: "What went wrong? *",
+        phName: "John",
+        phContact: "Room 204 or john@email.com",
+        phComment: "Tell us what happened...",
+        submitBtn: "Send to Management",
+        cancelBtn: "Cancel",
+        sentTitle: "Message Sent",
+        sentText: "Thank you for your honesty. Your message has been sent directly to Moxy Warsaw City Management.",
+        closeBtn: "Close"
+      }
+    };
+
+    // Pre-configured settings with the exact Google Place ID link provided
+    const DEFAULT_SETTINGS = {
+      hotelName: "Moxy Warsaw City",
+      googleUrl: "https://search.google.com/local/writereview?placeid=ChIJaya_WgzNHkcRaVzJJPo0aYE",
+      managerEmail: "manager@moxywarsawcity.com",
+      lang: "pl"
+    };
+
+    let currentLang = "pl";
+    let selectedRating = 0;
+
+    function getSettings() {
+      try {
+        const saved = localStorage.getItem('moxy_review_settings');
+        if (saved) return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to load settings:", e);
+      }
+      return DEFAULT_SETTINGS;
+    }
+
+    // Helper function to format & fix URLs
+    function normalizeUrl(url) {
+      if (!url) return DEFAULT_SETTINGS.googleUrl;
+      let cleanUrl = url.trim();
+      if (!/^https?:\/\//i.test(cleanUrl)) {
+        cleanUrl = 'https://' + cleanUrl;
+      }
+      return cleanUrl;
+    }
+
+    // Interactive Star Hover Functions
+    function highlightStars(rating) {
+      const stars = document.querySelectorAll('.star-btn');
+      stars.forEach((star, index) => {
+        if (index < rating) {
+          star.classList.remove('text-slate-700');
+          star.classList.add('text-moxy-magenta', 'star-glow');
+        } else {
+          star.classList.remove('text-moxy-magenta', 'star-glow');
+          star.classList.add('text-slate-700');
+        }
+      });
+    }
+
+    function resetStars() {
+      highlightStars(selectedRating);
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const dict = TRANSLATIONS[lang] || TRANSLATIONS.pl;
+
+      document.getElementById('greetingText').innerText = dict.greeting;
+      document.getElementById('clickToRateHint').innerText = dict.clickToRate;
+      document.getElementById('thanksTitle').innerText = dict.thanksTitle;
+      document.getElementById('thanksText').innerText = dict.thanksText;
+      document.getElementById('openGoogleBtnText').innerText = dict.openGoogleBtn;
+      document.getElementById('backBtn1').innerText = dict.backBtn;
+      document.getElementById('sorryTitle').innerText = dict.sorryTitle;
+      document.getElementById('sorryText').innerText = dict.sorryText;
+      document.getElementById('lblGuestName').innerText = dict.lblGuestName;
+      document.getElementById('lblGuestContact').innerText = dict.lblGuestContact;
+      document.getElementById('lblGuestComment').innerText = dict.lblGuestComment;
+      document.getElementById('guestName').placeholder = dict.phName;
+      document.getElementById('guestContact').placeholder = dict.phContact;
+      document.getElementById('guestComment').placeholder = dict.phComment;
+      document.getElementById('submitFeedbackBtn').innerText = dict.submitBtn;
+      document.getElementById('backBtn2').innerText = dict.cancelBtn;
+      document.getElementById('sentTitle').innerText = dict.sentTitle;
+      document.getElementById('sentText').innerText = dict.sentText;
+      document.getElementById('closeBtn').innerText = dict.closeBtn;
+
+      // Toggle language buttons styling
+      const plBtn = document.getElementById('langPlBtn');
+      const enBtn = document.getElementById('langEnBtn');
+
+      if (lang === 'pl') {
+        plBtn.className = "px-2.5 py-0.5 rounded-full text-xs font-bold transition-all duration-200 bg-moxy-magenta text-white";
+        enBtn.className = "px-2.5 py-0.5 rounded-full text-xs font-bold transition-all duration-200 text-slate-400 hover:text-white";
+      } else {
+        enBtn.className = "px-2.5 py-0.5 rounded-full text-xs font-bold transition-all duration-200 bg-moxy-magenta text-white";
+        plBtn.className = "px-2.5 py-0.5 rounded-full text-xs font-bold transition-all duration-200 text-slate-400 hover:text-white";
+      }
+    }
+
+    function rate(stars) {
+      selectedRating = stars;
+      highlightStars(stars);
+      const settings = getSettings();
+
+      if (stars >= 4) {
+        document.getElementById('ratingSection').classList.add('hidden');
+        document.getElementById('redirectSection').classList.remove('hidden');
+
+        const targetUrl = normalizeUrl(settings.googleUrl);
+        document.getElementById('googleRedirectBtn').href = targetUrl;
+
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 1200);
+      } else {
+        document.getElementById('ratingSection').classList.add('hidden');
+        document.getElementById('feedbackSection').classList.remove('hidden');
+      }
+    }
+
+    function submitFeedback(event) {
+      event.preventDefault();
+      const settings = getSettings();
+      const name = document.getElementById('guestName').value || 'Anonymous';
+      const contact = document.getElementById('guestContact').value || 'Not provided';
+      const comment = document.getElementById('guestComment').value;
+
+      const subject = encodeURIComponent(`Feedback from Guest - ${settings.hotelName}`);
+      const body = encodeURIComponent(`Name: ${name}\nContact: ${contact}\nRating: ${selectedRating} Star(s)\n\nFeedback:\n${comment}`);
+      
+      // Open default email client with feedback prefilled
+      window.location.href = `mailto:${settings.managerEmail}?subject=${subject}&body=${body}`;
+
+      document.getElementById('feedbackSection').classList.add('hidden');
+      document.getElementById('thankYouSection').classList.remove('hidden');
+    }
+
+    function resetApp() {
+      selectedRating = 0;
+      resetStars();
+      document.getElementById('complaintForm').reset();
+
+      document.getElementById('redirectSection').classList.add('hidden');
+      document.getElementById('feedbackSection').classList.add('hidden');
+      document.getElementById('thankYouSection').classList.add('hidden');
+      document.getElementById('ratingSection').classList.remove('hidden');
+    }
+
+    function toggleSettingsModal() {
+      const modal = document.getElementById('settingsModal');
+      modal.classList.toggle('hidden');
+    }
+
+    function toggleHelpModal() {
+      const modal = document.getElementById('helpModal');
+      modal.classList.toggle('hidden');
+    }
+
+    function saveSettings(event) {
+      event.preventDefault();
+      const rawUrl = document.getElementById('settingGoogleUrl').value;
+      const normalizedUrl = normalizeUrl(rawUrl);
+
+      const newSettings = {
+        hotelName: document.getElementById('settingHotelName').value,
+        googleUrl: normalizedUrl,
+        managerEmail: document.getElementById('settingManagerEmail').value,
+        lang: currentLang
+      };
+
+      localStorage.setItem('moxy_review_settings', JSON.stringify(newSettings));
+      init();
+      toggleSettingsModal();
+    }
+
+    function init() {
+      const settings = getSettings();
+      
+      document.getElementById('displayHotelTitle').innerText = settings.hotelName;
+      document.getElementById('footerHotelName').innerText = settings.hotelName;
+      document.getElementById('headerHotelName').innerText = settings.hotelName.replace(/^Moxy\s+/i, '');
+      document.getElementById('year').innerText = new Date().getFullYear();
+
+      const validGoogleUrl = normalizeUrl(settings.googleUrl);
+
+      document.getElementById('settingHotelName').value = settings.hotelName;
+      document.getElementById('settingGoogleUrl').value = settings.googleUrl;
+      document.getElementById('settingManagerEmail').value = settings.managerEmail;
+
+      document.getElementById('googleRedirectBtn').href = validGoogleUrl;
+
+      setLanguage(settings.lang || 'pl');
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
